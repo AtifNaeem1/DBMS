@@ -1,0 +1,52 @@
+1. Find out the PG-13 rated comedy movies. DO NOT use the film_list table.
+
+SELECT * FROM
+film , film_category, category
+WHERE film.rating = "PG-13"
+		AND film.film_id = film_category.film_id
+		AND film_category.category_id = category.category_id
+        AND category.name = "Comedy";
+
+
+
+2. Find out the top 3 rented horror movies
+
+SELECT * FROM
+film,  film_category, category
+WHERE film.film_id = film_category.film_id
+		AND film_category.category_id = category.category_id
+        AND category.name = "Horror"
+ORDER BY film.rental_rate DESC
+limit 3;
+
+
+3. Find out the list of customers from India who have rented sports movies.
+
+SELECT * FROM
+customer_list, rental, inventory,film_category, category
+WHERE Customer_list.country = "India"
+	AND Customer_list.ID = rental.customer_id
+    AND rental.inventory_id = inventory.inventory_id
+    AND inventory.film_id = film_category.film_id
+    AND film_category.category_id = category.category_id
+    AND category.name = "Sports";
+        
+        
+4. Find out the list of customers from Canada who have rented “NICK WAHLBERG” movies.
+
+SELECT  * FROM
+customer_list, rental, inventory,film_list
+WHERE Customer_list.country = "Canada"
+	AND Customer_list.ID = rental.customer_id
+    AND rental.inventory_id = inventory.inventory_id
+    AND inventory.film_id = film_list.FID
+    AND actors like '%NICK WAHLBERG%';
+    
+    
+5. Find out the number of movies in which “SEAN WILLIAMS” acted.
+
+SELECT COUNT(*)
+FROM film_list
+WHERE actors like '%SEAN WILLIAMS%';
+    
+    
